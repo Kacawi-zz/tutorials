@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Mahmoud Ahmed" />
+
+
+<title>Thinking in multiple dimensions</title>
+
+<script src="01.Thinking_in_multiple_dimensions_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="01.Thinking_in_multiple_dimensions_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="01.Thinking_in_multiple_dimensions_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="01.Thinking_in_multiple_dimensions_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="01.Thinking_in_multiple_dimensions_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="01.Thinking_in_multiple_dimensions_files/navigation-1.1/tabsets.js"></script>
+<link href="01.Thinking_in_multiple_dimensions_files/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="01.Thinking_in_multiple_dimensions_files/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Thinking in multiple dimensions</h1>
+<h4 class="author"><em>Mahmoud Ahmed</em></h4>
+<h4 class="date"><em>2/13/2017</em></h4>
+
+</div>
+
+
+<script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
+<div id="data-science-and-biology" class="section level2">
+<h2>Data science and Biology</h2>
+<p>Chances are, you are a biologist looking for tools like R to leverage the data analysis step of your regular workflow or you have a statistical or programming background and want to apply to biology.</p>
+<p>The intersection of computer programming, statistics and a particular knowledge domain is called data science. If you are like me, and your domain of application is biology, it would be called computational biology, however, it goes with many different other names. That said, as a computational biologist you are better off following the conventions and best practices of data science. However, as in all applications of data science, there are many data structures, methods and packages that were created specifically to solve problems in biology.</p>
+</div>
+<div id="tackling-biology-with-r" class="section level2">
+<h2>Tackling Biology with R</h2>
+<p>The aim of this tutorial is to take you from the convenience of the spread sheets to the more capable (less comfortable at first though) text-based environment like R where you can manage your data, perform statistics and visualize it at publication level graphs. All in the context of biology.<br />
+But first things first, why would you need to do that while excel or Google sheets might just do?<br />
+Few reasons:</p>
+<ul>
+<li><p>In R, you can handle bigger data sets efficiently. These data could be produced in your own lab or obtained from public repositories like <a href="https://www.ncbi.nlm.nih.gov/geo/">Gene Expression Omnibus (GEO)</a> or <a href="https://www.ncbi.nlm.nih.gov/sra">Short Read Archive (SRA)</a> (more on this later). In other words, you can scale up your work/research easily</p></li>
+<li><p>Perform advanced statistics and use machine learning to gain deeper insights on your data</p></li>
+<li><p>Interactively explore your data and produce basic and complex publication-level graphs</p></li>
+<li><p>Communicate your data, analysis and results in a reproducible way</p></li>
+</ul>
+<p>For more information, read an <a href="https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Introduction-and-preliminaries">Introduction to R</a> from the R manuals. <a href="https://www.datacamp.com/courses/introduction-to-r-edx-11">Introduction to R</a> course on is one of the best places to start learning R, in case you haven’t yet.</p>
+<p>First, we will introduce you to some key concepts; these could be an experiment in the field of biology or a statistical method and there implementation R and Bioconductor. Then, we will walk you through some examples and interactive exercises. There are many resources to learn from, so we will refer to some of them.</p>
+<p>So why not start by a brief introduction to Bioconductor, and a few more key ideas!</p>
+<ul>
+<li><p><a href="http://bioconductor.org">Bioconductor</a> provides tools for the analysis and comprehension of high-throughput genomic data. Bioconductor uses the R statistical programming language, and is open source and open development. It has two releases each year, 1296 software packages, and an active user community.</p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/High_throughput_biology">High through-put biology</a> is the use of automation equipment with classical cell biology techniques to address biological questions that are otherwise unattainable using conventional methods.</p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/DNA_microarray">Microarrays</a>: A microarray is a multiplex lab-on-a-chip. It is a 2D array on a solid substrate (usually a glass slide or silicon thin-film cell) that assays large amounts of biological material using high-throughput screening miniaturized, multiplexed and parallel processing and detection methods.</p></li>
+</ul>
+</div>
+<div id="gathering-your-data" class="section level2">
+<h2>Gathering your Data</h2>
+<div id="encoding-the-experimental-design-in-a-tidy-format" class="section level3">
+<h3>Encoding the experimental design in a tidy format</h3>
+<p>Whether you are working with data from your own lab or obtaining it from public repositories, you are most likely striving to impede your experimental design in the data representation or trying to understand what others are investigating in their studies. This is worthy spending time on when designing an experiment or exploring others data. You might be familiar with what <a href="https://vita.had.co.nz/papers/tidy-data.pdf">tidy data</a> is, although not identical, biologists use similar ways to represent their design and data. For instance, <em>variables</em> might be referred to as <em>samples</em> and <em>observations</em> as <em>features</em> in a biological data.</p>
+<p>Think of any experiment in terms of <em>samples</em> and <em>features</em>. <em>Samples</em> are the subjects under study; they could be cell lines, tissues, mice or individual patients. <em>Features</em> are the characteristics you measure about your samples; they could be gene expression, SNPs, body weight or blood pressure. The measurements you get from the machine are the <em>data</em>. Other information you have about samples and features are usually called <em>metadata</em>. <em>Metadata</em> are usually where you encode your experimental design and any previous knowledge you already have, to give context to your study. For instance, you might have two groups of samples; control vs treatment or male vs female. You might have beforehand information/annotation about the genomic locations of the genes you are measuring their expression.</p>
+<p>One more thing before go through an example, very often there will be <em>replicates</em> in your study. By convention, you should treat them as separate samples and include a variable in the metadata to keep tracking of which is which. Whether your replicates are biological or technical replicates makes no difference in the way you store them and sometimes even during the analysis. Only when you start interpreting your results, it makes a big different. That’s why you should keep this valuable information as metadata.</p>
+<p>Let’s go through a toy example first. Say you are interested in the effect of a particular drug on gene expression in mice brains. Specifically, 10 genes which you know from literature that they exist on two different chromosomes 1 and 2. You got 10 mice (6 females and 4 males), you randomized them equally into two groups (treatment and control). After the experiment was over you received the gene expression data, one measurement per gene in every mouse. What would be a good way to store these data and preserve the information you know about your samples and measurements?<br />
+Look what you have first:</p>
+<ul>
+<li><p>10 mice (<em>samples</em>) for each you have 10 gene expression measurements (<em>features</em>)</p></li>
+<li><p>information about samples; treatment vs control and male vs female</p></li>
+<li><p>information about features; chromosomal locations</p></li>
+</ul>
+<p>Let’s say you will organize your data in tables.</p>
+<ul>
+<li><p>Put samples in columns</p></li>
+<li><p>Put features in rows</p></li>
+<li><p>Use a separate table for each kind of data</p></li>
+</ul>
+<p>You can use 10 x 10 table to store the measurements. Each sample is a column and each gene is a row. Another table to store the metadata (treatment and sex information) about the samples. And a third table to store the metadata about the genes (chromosomal locations). So far you used three tables each of them is connected to at least another one by a row or a column.<br />
+It turned out this is a very efficient way to store data. Imagine you have hundreds of samples, for each you have thousands of measurements, this is typical for a high-throughput experiment. At the same time, you collected metadata about the samples, and you have plenty of information about these features from previous studies. Data become bigger in terms of size and dimensions, hence comes the title <em>“Thinking in Multiple Dimensions”</em>, and they no longer fit on a screen or a single excel sheet. The idea of the <em>three-tables</em> connected by and <em>edge</em> (a row or a column) is still applicable and efficient.</p>
+<p><img src="figures/three-tables.png" alt="three-tables notion" width="500" height="500" align="middle"></p>
+</div>
+<div id="three-tables-notion-implemntation-expressionset" class="section level3">
+<h3>Three-tables notion implemntation (ExpressionSet)</h3>
+<p>Think of your data as a cube. It has multiple surfaces each is a table of data. They share edges which could be a column or a row so each table is linked to at least one other table. This way you can use data from different tables to answer your questions.</p>
+<p>The authors of Bioconductor put an effort in creating data structures and containers that are smart and efficient. One of these data containers is the <code>ExpressionSet</code>. It borrows the idea of three-tables to represent the data and metadata of high-throughput experiments such as microarrays.</p>
+<ul>
+<li><p>A main table, or rather a matrix for the measurements with samples in columns and probe measurements (features) in rows. This is called the <em>expression matrix</em> or the <em>assay data</em></p></li>
+<li><p>Another table, or a data frame, for the metadata about the samples. This is called the <em>phenotype</em> data</p></li>
+<li><p>A third table, or a data frame as well, for the metadata (annotation) about the features. This is called the <em>features</em> data</p></li>
+<li><p>Additionally, it stores information about the experiment, protocol and microarrays platform in experimental data, <em>protocol</em> data and <em>annotation</em> spaces</p></li>
+</ul>
+<p>Let’s see how this works in an R session.<br />
+The DataCamp team installed Bioconductor on their platform, so you can explore it without having to worry about installation, although its really easy and will come back to it in a later occasion. In this first exercise, you will need to load an example <code>ExpressionSet</code> called <code>sample.ExpressionSet</code> from the package <code>Biobase</code> using the function <code>data()</code>. An R object is created in your session with the same name and will be accessible for you for the rest of the exercises. After loading the data set, go on and call <code>class()</code> on the object <code>sample.ExpressionSet</code>. Finally, you can use a <code>?</code> followed by the name of the object <code>sample.ExpressionSet</code> to see a description of the data set before digging deeper into it.</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoQmlvYmFzZSkiLCJzYW1wbGUiOiIjIGxvYWQgdGhlIGRhdGFzZXQgYHNhbXBsZS5FeHByZXNzaW9uU2V0YCBieSBjYWxsaW5nIGBkYXRhKClgXG5cblxuIyBjaGVjayBjbGFzcyBvZiB0aGUgb2JqZWN0IGBzYW1wbGUuRXhwcmVzc2lvblNldGAgdXNpbmcgYGNsYXNzKClgXG5cblxuIyBvcGVuIHRoZSBoZWxwIGZpbGUgb2YgdGhlIGRhdGEgc2V0IHVzaW5nIGA/YCBmb2xsb3dlZCBieSBgc2FtcGxlLkV4cHJlc3Npb25TZXRgIiwic29sdXRpb24iOiIjIGxvYWQgdGhlIGRhdGFzZXQgYHNhbXBsZS5FeHByZXNzaW9uU2V0YCBieSBjYWxsaW5nIGBkYXRhKClgXG5kYXRhKHNhbXBsZS5FeHByZXNzaW9uU2V0KVxuXG4jIGNoZWNrIGNsYXNzIG9mIHRoZSBvYmplY3QgYHNhbXBsZS5FeHByZXNzaW9uU2V0YCB1c2luZyBgY2xhc3MoKWBcbmNsYXNzKHNhbXBsZS5FeHByZXNzaW9uU2V0KVxuXG4jIG9wZW4gdGhlIGhlbHAgZmlsZSBvZiB0aGUgZGF0YSBzZXQgdXNpbmcgYD9gIGZvbGxvd2VkIGJ5IGBzYW1wbGUuRXhwcmVzc2lvblNldGBcbj9zYW1wbGUuRXhwcmVzc2lvblNldCIsInNjdCI6InRlc3RfZnVuY3Rpb24oJ2RhdGEnLCBhcmdzID0gJ3NhbXBsZS5FeHByZXNzaW9uU2V0JyxcbiAgICAgICAgICAgICAgbm90X2NhbGxlZF9tc2cgPSAnSGF2ZSB5b3UgY2FsbGVkIGBkYXRhYCBvbiBgc2FtcGxlLkV4cHJlc3Npb25TZXRgLicpXG50ZXN0X2Z1bmN0aW9uKCdjbGFzcycsIGFyZ3MgPSAnc2FtcGxlLkV4cHJlc3Npb25TZXQnLFxuICAgICAgICAgICAgICBub3RfY2FsbGVkX21zZyA9ICdIYXZlIHlvdSBjYWxsZWQgYGNsYXNzYCBvbiBgc2FtcGxlLkV4cHJlc3Npb25TZXRgLicpXG50ZXN0X3N0dWRlbnRfdHlwZWQoJz9zYW1wbGUuRXhwcmVzc2lvblNldCcsXG4gICAgICAgICAgICAgICAgICAgZml4ZWQgPSBUUlVFLFxuICAgICAgICAgICAgICAgICAgIG5vdF90eXBlZF9tc2cgPSAnSGF2ZSB5b3UgdHlwZWQgYD9zYW1wbGUuRXhwcmVzc2lvblNldGA/JylcbnN1Y2Nlc3NfbXNnKCdHb29kIHN0YXJ0LiBgc2FtcGxlLkV4cHJlc3Npb25TZXRgIGlzIG5vdyBsb2FkZWQuJykifQ==
+</div>
+<p>After reading the help file of the data set, you probably have an idea or some expectations of what the object <code>sample.ExpressionSet</code> contains. To inspect an <code>Expression Set</code>, all you need to do is to type the object name in the R console and hit enter, it has a nice <code>print</code> method that shows general information about the set. Go on and do that, then cross reference the output with the description you saw earlier in the help file to see how different information are encoded.</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoQmlvYmFzZSlcbmRhdGEoc2FtcGxlLkV4cHJlc3Npb25TZXQpIiwic2FtcGxlIjoiIyBpbnNwZWN0IHRoZSBvYmplY3QgYHNhbXBsZS5FeHByZXNzaW9uU2V0YCIsInNvbHV0aW9uIjoiIyBpbnNwZWN0IHRoZSBvYmplY3QgYHNhbXBsZS5FeHByZXNzaW9uU2V0YFxuc2FtcGxlLkV4cHJlc3Npb25TZXQiLCJzY3QiOiJ0ZXN0X3N0dWRlbnRfdHlwZWQoJ3NhbXBsZS5FeHByZXNzaW9uU2V0JyxcbiAgICAgICAgICAgICAgICAgICBmaXhlZCA9IFRSVUUsXG4gICAgICAgICAgICAgICAgICAgbm90X3R5cGVkX21zZyA9ICdIYXZlIHlvdSB0eXBlZCBgc2FtcGxlLkV4cHJlc3Npb25TZXRgIHRvIGluc3BlY3QgdGhlIGRhdGFzZXQ/JylcbnN1Y2Nlc3NfbXNnKCdHcmVhdC4gTm93IGNvbXBhcmUgdGhlIG91dHB1dCB0byB0aGUgaGVscCBmaWxlLicpIn0=
+</div>
+<p>Now you can tell the number samples in this data set, the number of features, the sample names, the types of phenotype data and the kind of chip (Annotation) which was used to generate this data set.</p>
+<p>The way you can access the different tables in an <code>Expression Set</code> is to use <em>accessors</em>. These are methods to access certain information or slots in the <code>Expression Set</code>, and they work just like regular R functions by calling them on the name of the <code>ExpressionSet</code> object, like in <code>accessor(ExpressionSet)</code>. A common practice is to extract these tables in separate objects before you start exploring and analyzing your data. You will do that to have a closer look on them. Use the accessors <code>exprs</code> and <code>pData</code> to access the expression matrix and the phenotype data, and assign their output to two new objects <code>mat</code> and <code>pdata</code>, in this order. Finally, inspect the class and dimensions of each using <code>class</code> and <code>dim</code>.</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoQmlvYmFzZSlcbmRhdGEoc2FtcGxlLkV4cHJlc3Npb25TZXQpIiwic2FtcGxlIjoiIyBjcmVhdGUgb2JqZWN0cyBgbWF0YCBhbmQgYHBkYXRhYCB1c2luZyBhY2Nlc3NvcnMgYGV4cHJzYCBhbmQgYHBEYXRhYFxuXG5cblxuIyBpbnNwZWN0IGNsYXNzIG9mIHRoZSBvYmplY3RzIGBtYXRgIGFuZCBgcGRhdGFgIHVzaW5nIGBjbGFzc2BcblxuXG5cbiMgaW5zcGVjdCBkaW1lbnNpb25zIG9mIHRoZSBvYmplY3RzIGBtYXRgIGFuZCBgcGRhdGFgIHVzaW5nIGBkaW1gIiwic29sdXRpb24iOiIjIGNyZWF0ZSBvYmplY3RzIGBtYXRgIGFuZCBgcGRhdGFgIHVzaW5nIGFjY2Vzc29ycyBgZXhwcnNgIGFuZCBgcERhdGFgXG5tYXQgPC0gZXhwcnMoc2FtcGxlLkV4cHJlc3Npb25TZXQpXG5wZGF0YSA8LSBwRGF0YShzYW1wbGUuRXhwcmVzc2lvblNldClcblxuIyBpbnNwZWN0IGNsYXNzIG9mIHRoZSBvYmplY3RzIGBtYXRgIGFuZCBgcGRhdGFgIHVzaW5nIGBjbGFzc2BcbmNsYXNzKG1hdClcbmNsYXNzKHBkYXRhKVxuXG4jIGluc3BlY3QgZGltZW5zaW9ucyBvZiB0aGUgb2JqZWN0cyBgbWF0YCBhbmQgYHBkYXRhYCB1c2luZyBgZGltYFxuZGltKG1hdClcbmRpbShwZGF0YSkiLCJzY3QiOiJ0ZXN0X29iamVjdCgnbWF0JyxcbiAgICAgICAgICAgIGluY29ycmVjdF9tc2cgPSAnSGF2ZSB5b3UgYXNzaWduZWQgdGhlIG91dHB1dCBvZiBgZXhwcnNgIHRvIGFuIG9iamVjdCBgbWF0YD8nKVxudGVzdF9vYmplY3QoJ3BkYXRhJyxcbiAgICAgICAgICAgIGluY29ycmVjdF9tc2cgPSAnSGF2ZSB5b3UgYXNzaWduZWQgdGhlIG91dHB1dCBvZiBgcERhdGFgIHRvIGFuIG9iamVjdCBgcGRhdGFgPycpXG50ZXN0X2Z1bmN0aW9uKCdjbGFzcycsIGFyZ3MgPSAnbWF0JyxcbiAgICAgICAgICAgICAgbm90X2NhbGxlZF9tc2cgPSAnSGF2ZSB5b3UgY2FsbGVkIGBjbGFzc2Agb24gYG1hdGA/JylcbnRlc3RfZnVuY3Rpb24oJ2NsYXNzJywgYXJncyA9ICdwZGF0YScsXG4gICAgICAgICAgICAgIG5vdF9jYWxsZWRfbXNnID0gJ0hhdmUgeW91IGNhbGxlZCBgY2xhc3NgIG9uIGBwZGF0YWA/JylcbnRlc3RfZnVuY3Rpb24oJ2RpbScsIGFyZ3MgPSAnbWF0JyxcbiAgICAgICAgICAgICAgbm90X2NhbGxlZF9tc2cgPSAnSGF2ZSB5b3UgY2FsbGVkIGBkaW1gIG9uIGBtYXRgPycpXG50ZXN0X2Z1bmN0aW9uKCdkaW0nLCBhcmdzID0gJ3BkYXRhJyxcbiAgICAgICAgICAgICAgbm90X2NhbGxlZF9tc2cgPSAnSGF2ZSB5b3UgY2FsbGVkIGBkaW1gIG9uIGBwZGF0YWA/JylcbnN1Y2Nlc3NfbXNnKCdHb29kIGpvYi4nKSJ9
+</div>
+<p>Notice how the number of columns in <code>mat</code> equals the number of rows in <code>pdata</code>. The phenotype data are descriptions of the samples in the columns of the expression matrix. Remember there should be a shared edge between the three tables, that’s it. Go on and check the names of the columns of <code>mat</code> and the row names of <code>pdata</code> and see if they are identical.</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoQmlvYmFzZSlcbmRhdGEoc2FtcGxlLkV4cHJlc3Npb25TZXQpXG5tYXQgPC0gZXhwcnMoc2FtcGxlLkV4cHJlc3Npb25TZXQpXG5wZGF0YSA8LSBwRGF0YShzYW1wbGUuRXhwcmVzc2lvblNldCkiLCJzYW1wbGUiOiIjIHByaW50IG91dCB0aGUgYGNvbG5hbWVzYCBvZiB0aGUgb2JqZWN0IGBtYXRgXG5cblxuIyBwcmludCBvdXQgdGhlIGByb3duYW1lc2Agb2YgdGhlIG9iamVjdCBgcGRhdGFgXG5cblxuIyBjaGVjayBpZiB0aGV5IGFyZSBpZGVudGljYWwiLCJzb2x1dGlvbiI6IiMgcHJpbnQgb3V0IHRoZSBgY29sbmFtZXNgIG9mIHRoZSBvYmplY3QgYG1hdGBcbmNvbG5hbWVzKG1hdClcblxuIyBwcmludCBvdXQgdGhlIGByb3duYW1lc2Agb2YgdGhlIG9iamVjdCBgcGRhdGFgXG5yb3duYW1lcyhwZGF0YSlcblxuIyBjaGVjayBpZiB0aGV5IGFyZSBpZGVudGljYWxcbmlkZW50aWNhbChjb2xuYW1lcyhtYXQpLCByb3duYW1lcyhwZGF0YSkpIiwic2N0IjoidGVzdF9mdW5jdGlvbignY29sbmFtZXMnLCBhcmdzID0gJ21hdCcsXG4gICAgICAgICAgICAgIG5vdF9jYWxsZWRfbXNnID0gJ0hhdmUgeW91IGNhbGxlZCBgY29sbmFtZXNgIG9uIGBtYXRgPycpXG50ZXN0X2Z1bmN0aW9uKCdyb3duYW1lcycsIGFyZ3MgPSAncGRhdGEnLFxuICAgICAgICAgICAgICBub3RfY2FsbGVkX21zZyA9ICdIYXZlIHlvdSBjYWxsZWQgYHJvd25hbWVzYCBvbiBgcGRhdGFgPycpXG50ZXN0X2Z1bmN0aW9uKCdpZGVudGljYWwnLCBhcmdzID0gYygnY29sbmFtZXMobWF0KScsICdyb3duYW1lcyhwZGF0YSknKSxcbiAgICAgICAgICAgICAgbm90X2NhbGxlZF9tc2cgPSAnSGF2ZSB5b3UgY2FsbGVkIGlkZW50aWNhbCB3aXRoIGBjb2xuYW1lcyhtYXQpYCBhbmQgYHJvd25hbWVzKHBkYXRhKWAsIGluIHRoaXMgb3JkZXI/JylcbnN1Y2Nlc3NfbXNnKCdTd2VldC4gVGhhdCB3YXMgdGhlIHNoYXJlZCBlZGdlLicpIn0=
+</div>
+<p>Similarly, you can extract the metadata/annotation about the features using <code>fData</code>, however the data set doesn’t contain any useful features data.<br />
+One nice feature about the <code>ExpressionSet</code> and many other data containers in the Bioconductor is that it is a closed-object. Remember an <code>ExpressionSet</code> encapsulates the data and the metadata from the experiment and they are connected to each other. Once you subset an <code>ExpressionSet</code>, changes are applied on its different slots. Say you only want to get the subset of data from certain samples in your experiment, you only need to subset the <code>ExpressionSet</code> once, then you get a new <code>ExpressionSet</code> with the data and the metadata for these particular samples.</p>
+<p>The phenotype data <code>pdata</code> has three variables <code>sex</code>, <code>type</code> and <code>score</code>. You can see that by calling <code>names(pdata)</code>. Say you want the subset of data which has a <code>score</code> more than 0.50, you can first create a logical, call it <code>high.score</code>, corresponds to the samples that satisfy that condition and use it to subset <code>sample.ExpressionSet</code>, same way you subset a data.frame in R, call the new <code>ExpressionSet</code> as <code>sub.ExpressionSet</code>.</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkoQmlvYmFzZSlcbmRhdGEoc2FtcGxlLkV4cHJlc3Npb25TZXQpXG5tYXQgPC0gZXhwcnMoc2FtcGxlLkV4cHJlc3Npb25TZXQpXG5wZGF0YSA8LSBwRGF0YShzYW1wbGUuRXhwcmVzc2lvblNldCkiLCJzYW1wbGUiOiIjIGNyZWF0ZSBhIGxvZ2ljYWwgb2YgdGhlIHZhcmlhYmxlIGBzY29yZWAgaGlnaGVyIHRoYW4gMC41MFxuXG5cbiMgc3Vic2V0IHRoZSBgc2FtcGxlLkV4cHJlc3Npb25TZXRgIHVzaW5nIGBbYCwgYXNzaWduIHRoZSBvdXRwdXQgdG8gYHN1Yi5FeHByZXNzaW9uU2V0YFxuXG5cbiMgZXhhbWluZSB0aGUgZGltZW5zaW9ucyBvZiBgZXhwcmVzYCBhbmQgYHBEYXRhYCBvZiB0aGUgc3Vic2V0IGBzdWIuRXhwcmVzc2lvblNldGAiLCJzb2x1dGlvbiI6IiMgY3JlYXRlIGEgbG9naWNhbCBvZiB0aGUgdmFyaWFibGUgYHNjb3JlYCBoaWdoZXIgdGhhbiAwLjUwXG5oaWdoLnNjb3JlIDwtIHBkYXRhJHNjb3JlID4gLjVcblxuIyBzdWJzZXQgdGhlIGBzYW1wbGUuRXhwcmVzc2lvblNldGAgdXNpbmcgYFtgLCBhc3NpZ24gdGhlIG91dHB1dCB0byBgc3ViLkV4cHJlc3Npb25TZXRgXG5zdWIuRXhwcmVzc2lvblNldCA8LSBzYW1wbGUuRXhwcmVzc2lvblNldFssIGhpZ2guc2NvcmVdXG5cbiMgZXhhbWluZSB0aGUgZGltZW5zaW9ucyBvZiBgZXhwcmVzYCBhbmQgYHBEYXRhYCBvZiB0aGUgc3Vic2V0IGBzdWIuRXhwcmVzc2lvblNldGBcbmRpbShleHBycyhzdWIuRXhwcmVzc2lvblNldCkpXG5kaW0ocERhdGEoc3ViLkV4cHJlc3Npb25TZXQpKSIsInNjdCI6InRlc3Rfb2JqZWN0KCdoaWdoLnNjb3JlJyxcbiAgICAgICAgICAgIGluY29ycmVjdF9tc2cgPSAnSGF2ZSB5b3UgZGVmaW5lZCBgaGlnaC5zY29yZWAgZm9yIGBwZGF0YSRzY29yZWAgaGlnaHQgdGhhbiAwLjU/JylcbnRlc3Rfb2JqZWN0KCdzdWIuRXhwcmVzc2lvblNldCcsXG4gICAgICAgICAgICBpbmNvcnJlY3RfbXNnID0gJ0hhdmUgeW91IGRlZmluZWQgYHN1Yi5FeHByZXNzaW9uU2V0YCBhcyBhIHN1YnNldCBvZiBgc2FtcGxlLkV4cHJlc3Npb25TZXRgIHdpdGggYGhpZ2guc2NvcmVgPycpXG50ZXN0X2Z1bmN0aW9uKCdkaW0nLCBhcmdzID0gJ2V4cHJzKHN1Yi5FeHByZXNzaW9uU2V0KScsXG4gICAgICAgICAgICAgIG5vdF9jYWxsZWRfbXNnID0gJ0hhdmUgeW91IGNhbGxlZCBgZGltYCBvbiBgZXhwcnMoc3ViLkV4cHJlc3Npb25TZXQpYD8nKVxudGVzdF9mdW5jdGlvbignZGltJywgYXJncyA9ICdwRGF0YShzdWIuRXhwcmVzc2lvblNldCknLFxuICAgICAgICAgICAgICBub3RfY2FsbGVkX21zZyA9ICdIYXZlIHlvdSBjYWxsZWQgYGRpbWAgb24gYHBEYXRhKHN1Yi5FeHByZXNzaW9uU2V0KWA/JylcbnN1Y2Nlc3NfbXNnKCdBbWF6aW5nLiBUaGlzIGlzIHRoZSBkZWZhdWx0IGJlaGF2aW9yIG9mIGNsb3NlZC1vYmplY3RzLicpIn0=
+</div>
+<p>Now the number of samples, which is the column number of the expression matrix and the row number of the phenotype data, is 12 instead of 24. If you try extracting the expression values and the phenotype data in the new object, there will be only data for samples with a <code>score</code> higher than 0.50.</p>
+<p>There is a lot to learn about <code>expressionset</code> and other Bioconductor data containers. Working with biological data through Bioconductor relies heavily on smart and efficient representation of data. You can read more about <code>ExpressionSet</code> in the help page by typing <code>?expressionset</code>.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -69,6 +69,8 @@ Let's say you will organize your data in tables.
 You can use 10 x 10 table to store the measurements. Each sample is a column and each gene is a row. Another table to store the metadata (treatment and sex information) about the samples. And a third table to store the metadata about the genes (chromosomal locations). So far you used three tables each of them is connected to at least another one by a row or a column.  
 It turned out this is a very efficient way to store data. Imagine you have hundreds of samples, for each you have thousands of measurements, this is typical for a high-throughput experiment. At the same time, you collected metadata about the samples, and you have plenty of information about these features from previous studies. Data become bigger in terms of size and dimensions, hence comes the title _"Thinking in Multiple Dimensions"_, and they no longer fit on a screen or a single excel sheet. The idea of the _three-tables_ connected by and _edge_ (a row or a column) is still applicable and efficient.  
 
+<img src="figures/three-tables.png" alt="three-tables notion" width="500" height="500" align="middle">  
+
 ### Three-tables notion implemntation (ExpressionSet)  
 Think of your data as a cube. It has multiple surfaces each is a table of data. They share edges which could be a column or a row so each table is linked to at least one other table. This way you can use data from different tables to answer your questions.  
 
