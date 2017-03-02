@@ -276,7 +276,50 @@ test_function('dim', args = 'pData(sub.ExpressionSet)',
 success_msg('Amazing. This is the default behavior of closed-objects.')
 ```
 
-Now the number of samples, which is the column number of the expression matrix and the row number of the phenotype data, is 12 instead of 24. If you try extracting the expression values and the phenotype data in the new object, there will be only data for samples with a `score` higher than 0.50.  
+Now the number of samples, which is the column number of the expression matrix and the row number of the phenotype data, is 12 instead of 24. If you try extracting the expression values and the phenotype data in the new object, there will be only data for samples with a `score` higher than 0.50. 
 
+Now, let's bring it together and construct an `ExpressionSet`. You will use the the expression matrix `mat` and the data frame `pdata` to do that but it works the same way for the data you would get from a public repository like GEO or generate in your own lab. Costructing an instance of `ExpressionSet` is as simple as the following two lines of code.  
+
+```
+new.ExpressionSet <- ExpressionSet(assayData = mat)
+pData(new_ExpressionSet) <- pdata
+```
+
+However to do that more formaly and to use the full potential of an `ExpressionSet`, there is another way but requires first to learn about a new class calle `AnnotatedDataFrame` that is typically used to store the phenotype data and the featuredata. An `AnnotatedDataFrame` contains two parts; a rgulat `data.fram` like the one you saw earlier `pdata` using the accessor `pData`, the actual data about the samples or the features. 
+Second part is `varMetadata`, containes a despription of each variable/column in a `data.frame` with number of rows equal number of columns in `pData`, and at least one column, named `labelDescription`.  
+
+To construct an `ExpressionSet`, first you will need to construt an `AnnotatedDataFrame` using a constructor with the same name and pass it the `pdata` and `var.metadata` as first and second arguments. Call it `phenotype.data`. Then use the constructor `ExpressionSet` with `mat` and `phenotype.data` to the apporpriate arguments. Call the new set as `new.ExpressionSet`.  
+
+```{r ex='construct_ExpressionSet', type='pre-exercise-code'}
+library(Biobase)
+data(sample.ExpressionSet)
+mat <- exprs(sample.ExpressionSet)
+pdata <- pData(sample.ExpressionSet)
+
+var.metadata <- varMetadata(sample.ExpressionSet)
+```
+```{r ex='construct_ExpressionSet', type='sample-code'}
+# Use `AnnotatedDataFrame` to construct `phenotype.data`
+
+# Use `ExpressionSet` to construct `new.ExpressionSet`
+
+```
+```{r ex='construct_ExpressionSet', type='solution'}
+# Use `AnnotatedDataFrame` to construct `phenotype.data`
+phenotype.data <- AnnotatedDataFrame(pdata, var.metadata)
+
+# Use `ExpressionSet` to construct `new.ExpressionSet`
+new.ExpressionSet <- ExpressionSet(assayData = mat,
+                                   phenoData = phenotype.data)
+```
+```{r ex='construct_ExpressionSet', type='sct'}
+test_object('var.metadata',
+            incorrect_msg = 'Have you defined `var.metadata` as an `var.metadata`?')
+test_object('new.ExpressionSet',
+            incorrect_msg = 'Have you defined `new.ExpressionSet` as an `ExpressionSet` instance?')
+success_msg('Good job.')
+```
+
+To wrap up, you first learned about the relation between computational biology and data science, then why it is important to use a text-based environment like R to handle high-throughput data. Also, you learned about the implemntation of the three-tables notion in the Bioconductor as an `ExpressionSet`.
 There is a lot to learn about `expressionset` and other Bioconductor data containers. Working with biological data through Bioconductor relies heavily on smart and efficient representation of data. You can read more about `ExpressionSet` in the help page by typing `?expressionset`.  
 
