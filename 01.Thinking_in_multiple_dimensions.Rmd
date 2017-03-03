@@ -90,16 +90,18 @@ The DataCamp team installed Bioconductor on their platform, so you can explore i
 ```{r ex='load_dataset', type='pre-exercise-code'}
 library(Biobase)
 ```
+
 ```{r ex='load_dataset', type='sample-code'}
 # load the dataset `sample.ExpressionSet` by calling `data()`
-
+data(..................)
 
 # check class of the object `sample.ExpressionSet` using `class()`
-
+class(.................)
 
 # open the help file of the data set using `?` followed by `sample.ExpressionSet`
-
+...............
 ```
+
 ```{r ex='load_dataset', type='solution'}
 # load the dataset `sample.ExpressionSet` by calling `data()`
 data(sample.ExpressionSet)
@@ -110,11 +112,12 @@ class(sample.ExpressionSet)
 # open the help file of the data set using `?` followed by `sample.ExpressionSet`
 ?sample.ExpressionSet
 ```
+
 ```{r ex='load_dataset', type='sct'}
-test_function('data', args = 'sample.ExpressionSet',
-              not_called_msg = 'Have you called `data` on `sample.ExpressionSet`.')
-test_function('class', args = 'sample.ExpressionSet',
-              not_called_msg = 'Have you called `class` on `sample.ExpressionSet`.')
+test_output_contains('data(sample.ExpressionSet)',
+              incorrect_msg = 'Have you called `data` on `sample.ExpressionSet`?')
+test_output_contains('class(sample.ExpressionSet)',
+              incorrect_msg = 'Have you called `class` on `sample.ExpressionSet`?')
 test_student_typed('?sample.ExpressionSet',
                    fixed = TRUE,
                    not_typed_msg = 'Have you typed `?sample.ExpressionSet`?')
@@ -127,18 +130,20 @@ After reading the help file of the data set, you probably have an idea or some e
 library(Biobase)
 data(sample.ExpressionSet)
 ```
+
 ```{r ex='inspect_dataset', type='sample-code'}
 # inspect the object `sample.ExpressionSet`
-
+....................
 ```
+
 ```{r ex='inspect_dataset', type='solution'}
 # inspect the object `sample.ExpressionSet`
 sample.ExpressionSet
 ```
+
 ```{r ex='inspect_dataset', type='sct'}
-test_student_typed('sample.ExpressionSet',
-                   fixed = TRUE,
-                   not_typed_msg = 'Have you typed `sample.ExpressionSet` to inspect the dataset?')
+test_output_contains('sample.ExpressionSet',
+                   incorrect_msg = 'Have you typed `sample.ExpressionSet` to inspect the dataset?')
 success_msg('Great. Now compare the output to the help file.')
 ```
 
@@ -151,19 +156,21 @@ Use the accessors `exprs` and `pData` to access the expression matrix and the ph
 library(Biobase)
 data(sample.ExpressionSet)
 ```
+
 ```{r ex='accessors', type='sample-code'}
 # create objects `mat` and `pdata` using accessors `exprs` and `pData`
-
-
+mat <- ......................
+pdata <- .......................
 
 # inspect class of the objects `mat` and `pdata` using `class`
-
-
+class(...)
+class(.....)
 
 # inspect dimensions of the objects `mat` and `pdata` using `dim`
-
-
+dim(...)
+dim(.....)
 ```
+
 ```{r ex='accessors', type='solution'}
 # create objects `mat` and `pdata` using accessors `exprs` and `pData`
 mat <- exprs(sample.ExpressionSet)
@@ -177,18 +184,19 @@ class(pdata)
 dim(mat)
 dim(pdata)
 ```
+
 ```{r ex='accessors', type='sct'}
 test_object('mat',
             incorrect_msg = 'Have you assigned the output of `exprs` to an object `mat`?')
 test_object('pdata',
             incorrect_msg = 'Have you assigned the output of `pData` to an object `pdata`?')
-test_function('class', args = 'mat',
+test_function('class', args = 'x', index = 1,
               not_called_msg = 'Have you called `class` on `mat`?')
-test_function('class', args = 'pdata',
+test_function('class', args = 'x', index = 2,
               not_called_msg = 'Have you called `class` on `pdata`?')
-test_function('dim', args = 'mat',
+test_function('dim', args = 'x', index = 1,
               not_called_msg = 'Have you called `dim` on `mat`?')
-test_function('dim', args = 'pdata',
+test_function('dim', args = 'x', index = 2,
               not_called_msg = 'Have you called `dim` on `pdata`?')
 success_msg('Good job.')
 ```
@@ -201,16 +209,18 @@ data(sample.ExpressionSet)
 mat <- exprs(sample.ExpressionSet)
 pdata <- pData(sample.ExpressionSet)
 ```
+
 ```{r ex='shared_edge', type='sample-code'}
 # print out the `colnames` of the object `mat`
-
+colnames(...)
 
 # print out the `rownames` of the object `pdata`
-
+rownames(......)
 
 # check if they are identical
-
+identical(...........,...........)
 ```
+
 ```{r ex='shared_edge', type='solution'}
 # print out the `colnames` of the object `mat`
 colnames(mat)
@@ -221,12 +231,13 @@ rownames(pdata)
 # check if they are identical
 identical(colnames(mat), rownames(pdata))
 ```
+
 ```{r ex='shared_edge', type='sct'}
-test_function('colnames', args = 'mat',
+test_function('colnames', args = 'x',
               not_called_msg = 'Have you called `colnames` on `mat`?')
-test_function('rownames', args = 'pdata',
+test_function('rownames', args = 'x',
               not_called_msg = 'Have you called `rownames` on `pdata`?')
-test_function('identical', args = c('colnames(mat)', 'rownames(pdata)'),
+test_function('identical', args = c("x", "y"),
               not_called_msg = 'Have you called identical with `colnames(mat)` and `rownames(pdata)`, in this order?')
 success_msg('Sweet. That was the shared edge.')
 ```
@@ -242,17 +253,19 @@ data(sample.ExpressionSet)
 mat <- exprs(sample.ExpressionSet)
 pdata <- pData(sample.ExpressionSet)
 ```
+
 ```{r ex='subsetting', type='sample-code'}
 # create a logical of the variable `score` higher than 0.50
-
+high.score <- ..................
 
 # subset the `sample.ExpressionSet` using `[`, assign the output to `sub.ExpressionSet`
-
+sub.ExpressionSet <- ..................................
 
 # examine the dimensions of `expres` and `pData` of the subset `sub.ExpressionSet`
-
-
+dim(.........................)
+dim(.........................)
 ```
+
 ```{r ex='subsetting', type='solution'}
 # create a logical of the variable `score` higher than 0.50
 high.score <- pdata$score > .5
@@ -264,14 +277,17 @@ sub.ExpressionSet <- sample.ExpressionSet[, high.score]
 dim(exprs(sub.ExpressionSet))
 dim(pData(sub.ExpressionSet))
 ```
+
 ```{r ex='subsetting', type='sct'}
 test_object('high.score',
+            eval = TRUE, 
             incorrect_msg = 'Have you defined `high.score` for `pdata$score` hight than 0.5?')
 test_object('sub.ExpressionSet',
+            eval = TRUE, 
             incorrect_msg = 'Have you defined `sub.ExpressionSet` as a subset of `sample.ExpressionSet` with `high.score`?')
-test_function('dim', args = 'exprs(sub.ExpressionSet)',
+test_function('dim', args = 'x', index = 1,
               not_called_msg = 'Have you called `dim` on `exprs(sub.ExpressionSet)`?')
-test_function('dim', args = 'pData(sub.ExpressionSet)',
+test_function('dim', args = 'x', index = 2,
               not_called_msg = 'Have you called `dim` on `pData(sub.ExpressionSet)`?')
 success_msg('Amazing. This is the default behavior of closed-objects.')
 ```
@@ -298,12 +314,15 @@ pdata <- pData(sample.ExpressionSet)
 
 var.metadata <- varMetadata(sample.ExpressionSet)
 ```
+
 ```{r ex='construct_ExpressionSet', type='sample-code'}
 # Use `AnnotatedDataFrame` to construct `phenotype.data`
+phenotype.data <- .......................................
 
 # Use `ExpressionSet` to construct `new.ExpressionSet`
-
+new.ExpressionSet <- ...................................................................
 ```
+
 ```{r ex='construct_ExpressionSet', type='solution'}
 # Use `AnnotatedDataFrame` to construct `phenotype.data`
 phenotype.data <- AnnotatedDataFrame(pdata, var.metadata)
@@ -312,14 +331,18 @@ phenotype.data <- AnnotatedDataFrame(pdata, var.metadata)
 new.ExpressionSet <- ExpressionSet(assayData = mat,
                                    phenoData = phenotype.data)
 ```
+
 ```{r ex='construct_ExpressionSet', type='sct'}
-test_object('var.metadata',
+test_object('phenotype.data',
+            eval = TRUE, 
             incorrect_msg = 'Have you defined `var.metadata` as an `var.metadata`?')
 test_object('new.ExpressionSet',
+            eval= TRUE, 
             incorrect_msg = 'Have you defined `new.ExpressionSet` as an `ExpressionSet` instance?')
 success_msg('Good job.')
 ```
 
 To wrap up, you first learned about the relation between computational biology and data science, then why it is important to use a text-based environment like R to handle high-throughput data. Also, you learned about the implemntation of the three-tables notion in the Bioconductor as an `ExpressionSet`.
+
 There is a lot to learn about `expressionset` and other Bioconductor data containers. Working with biological data through Bioconductor relies heavily on smart and efficient representation of data. You can read more about `ExpressionSet` in the help page by typing `?expressionset`.  
 
