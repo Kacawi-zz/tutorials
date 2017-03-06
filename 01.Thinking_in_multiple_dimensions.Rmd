@@ -321,6 +321,9 @@ phenotype.data <- .......................................
 
 # Use `ExpressionSet` to construct `new.ExpressionSet`
 new.ExpressionSet <- ...................................................................
+
+# inspect the object `new.ExpressionSet`
+....................
 ```
 
 ```{r ex='construct_ExpressionSet', type='solution'}
@@ -330,6 +333,8 @@ phenotype.data <- AnnotatedDataFrame(pdata, var.metadata)
 # Use `ExpressionSet` to construct `new.ExpressionSet`
 new.ExpressionSet <- ExpressionSet(assayData = mat,
                                    phenoData = phenotype.data)
+# inspect the object `new.ExpressionSet`
+new.ExpressionSet
 ```
 
 ```{r ex='construct_ExpressionSet', type='sct'}
@@ -339,10 +344,10 @@ test_object('phenotype.data',
 test_object('new.ExpressionSet',
             eval= TRUE, 
             incorrect_msg = 'Have you defined `new.ExpressionSet` as an `ExpressionSet` instance?')
+test_output_contains('new.ExpressionSet',
+                   incorrect_msg = 'Have you typed `new.ExpressionSet` to inspect the dataset?')
 success_msg('Good job.')
 ```
 
-To wrap up, you first learned about the relation between computational biology and data science, then why it is important to use a text-based environment like R to handle high-throughput data. Also, you learned about the implemntation of the three-tables notion in the Bioconductor as an `ExpressionSet`.
-
-There is a lot to learn about `expressionset` and other Bioconductor data containers. Working with biological data through Bioconductor relies heavily on smart and efficient representation of data. You can read more about `ExpressionSet` in the help page by typing `?expressionset`.  
+To wrap up, you first learned about the relation between computational biology and data science, then why it is important to use a text-based environment like R to handle high-throughput data. Also, you learned about the implemntation of the three-tables notion in the Bioconductor as an `ExpressionSet`. There is a lot to learn about the `ExpressionSet` and other Bioconductor data containers. Working with biological data through Bioconductor relies heavily on smart and efficient representation of data. 
 
