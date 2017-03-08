@@ -12,11 +12,13 @@ tutorial::go_interactive()
 ```
 
 ## Data science and Biology  
+
 Chances are, you are a biologist looking for tools like R to leverage the data analysis step of your regular workflow or you have a statistical or programming background and want to apply to biology. 
   
 The intersection of computer programming, statistics and a particular knowledge domain is called data science. If you are like me, and your domain of application is biology, it would be called computational biology, however, it goes with many different other names. That said, as a computational biologist you are better off following the conventions and best practices of data science. However, as in all applications of data science, there are many data structures, methods and packages that were created specifically to solve problems in biology. 
 
 ## Tackling Biology with R
+
 The aim of this tutorial is to take you from the convenience of the spread sheets to the more capable (less comfortable at first though) text-based environment like R where you can manage your data, perform statistics and visualize it at publication level graphs. All in the context of biology.  
 But first things first, why would you need to do that while excel or Google sheets might just do?  
 Few reasons:    
@@ -42,14 +44,25 @@ So why not start by a brief introduction to Bioconductor, and a few more key ide
   -	[Microarrays](https://en.wikipedia.org/wiki/DNA_microarray): A microarray is a multiplex lab-on-a-chip. It is a 2D array on a solid substrate (usually a glass slide or silicon thin-film cell) that assays large amounts of biological material using high-throughput screening miniaturized, multiplexed and parallel processing and detection methods.  
 
 ## Gathering your Data  
+
 ### Encoding the experimental design in a tidy format  
-Whether you are working with data from your own lab or obtaining it from public repositories, you are most likely striving to impede your experimental design in the data representation or trying to understand what others are investigating in their studies. This is worthy spending time on when designing an experiment or exploring others data. You might be familiar with what [tidy data](https://vita.had.co.nz/papers/tidy-data.pdf) is, although not identical, biologists use similar ways to represent their design and data. For instance, _variables_ might be referred to as _samples_ and _observations_ as _features_ in a biological data.  
 
-Think of any experiment in terms of _samples_ and _features_. _Samples_ are the subjects under study; they could be cell lines, tissues, mice or individual patients. _Features_ are the characteristics you measure about your samples; they could be gene expression, SNPs, body weight or blood pressure. The measurements you get from the machine are the _data_. Other information you have about samples and features are usually called _metadata_. _Metadata_ are usually where you encode your experimental design and any previous knowledge you already have, to give context to your study. For instance, you might have two groups of samples; control vs treatment or male vs female. You might have beforehand information/annotation about the genomic locations of the genes you are measuring their expression.  
+Whether you are working with data from your own lab or obtaining it from public repositories, you are most likely striving to impede your experimental design in the data representation or trying to understand what others are investigating in their studies. This is worthy spending time on when designing an experiment or exploring others data. 
 
-One more thing before go through an example, very often there will be _replicates_ in your study. By convention, you should treat them as separate samples and include a variable in the metadata to keep tracking of which is which. Whether your replicates are biological or technical replicates makes no difference in the way you store them and sometimes even during the analysis. Only when you start interpreting your results, it makes a big different. That's why you should keep this valuable information as metadata.  
+You might be familiar with what [tidy data](https://vita.had.co.nz/papers/tidy-data.pdf) is, although not identical, biologists use similar ways to represent their design and data. For instance, _variables_ might be referred to as _samples_ and _observations_ as _features_ in a biological data.  
 
-Let's go through a toy example first. Say you are interested in the effect of a particular drug on gene expression in mice brains. Specifically, 10 genes which you know from literature that they exist on two different chromosomes 1 and 2. You got 10 mice (6 females and 4 males), you randomized them equally into two groups (treatment and control). After the experiment was over you received the gene expression data, one measurement per gene in every mouse. What  would be a good way to store these data and preserve the information you know about your samples and measurements?  
+Think of any experiment in terms of _samples_ and _features_. _Samples_ are the subjects under study; they could be cell lines, tissues, mice or individual patients. _Features_ are the characteristics you measure about your samples; they could be gene expression, SNPs, body weight or blood pressure. The measurements you get from the machine are the _data_. 
+
+Other information you have about samples and features are usually called _metadata_. _Metadata_ are usually where you encode your experimental design and any previous knowledge you already have, to give context to your study. For instance, you might have two groups of samples; control vs treatment or male vs female. You might have beforehand information/annotation about the genomic locations of the genes you are measuring their expression.  
+
+One more thing before go through an example, very often there will be _replicates_ in your study. By convention, you should treat them as separate samples and include a variable in the metadata to keep tracking of which is which. Whether your replicates are biological or technical replicates makes no difference in the way you store them and sometimes even during the analysis. Only when you start interpreting your results, it makes a big difference. That's why you should keep this valuable information as metadata.  
+
+Let's go through a toy example first. 
+
+Let's say you are interested in the effect of a particular drug on gene expression in mice brains. Specifically, 10 genes which you know from literature that they exist on two different chromosomes 1 and 2. You got 10 mice (6 females and 4 males), you randomized them equally into two groups (treatment and control). After the experiment was over you received the gene expression data, one measurement per gene in every mouse. 
+
+What would be a good way to store these data and preserve the information you know about your samples and measurements?  
+
 Look what you have first:  
 
   - 10 mice (*samples*)  for each you have 10 gene expression measurements (*features*)   
@@ -66,15 +79,21 @@ Let's say you will organize your data in tables.
   
   -	Use a separate table for each kind of data  
 
-You can use 10 x 10 table to store the measurements. Each sample is a column and each gene is a row. Another table to store the metadata (treatment and sex information) about the samples. And a third table to store the metadata about the genes (chromosomal locations). So far you used three tables each of them is connected to at least another one by a row or a column.  
-It turned out this is a very efficient way to store data. Imagine you have hundreds of samples, for each you have thousands of measurements, this is typical for a high-throughput experiment. At the same time, you collected metadata about the samples, and you have plenty of information about these features from previous studies. Data become bigger in terms of size and dimensions, hence comes the title _"Thinking in Multiple Dimensions"_, and they no longer fit on a screen or a single excel sheet. The idea of the _three-tables_ connected by and _edge_ (a row or a column) is still applicable and efficient.  
+You can use 10 x 10 table to store the measurements. Each sample is a column and each gene is a row. Another table to store the metadata (treatment and sex information) about the samples. And a third table to store the metadata about the genes (chromosomal locations). So far, you used three tables each of them is connected to at least another one by a row or a column.  <!-- Could you rewrite this last sentence? --> 
+
+It turns out this is a very efficient way to store data. 
+
+Imagine you have hundreds of samples, for each you have thousands of measurements, this is typical for a high-throughput experiment. At the same time, you collected metadata about the samples, and you have plenty of information about these features from previous studies. Data become bigger in terms of size and dimensions, hence comes the title _"Thinking in Multiple Dimensions"_, and they no longer fit on a screen or a single excel sheet. The idea of the _three-tables_ connected by and _edge_ (a row or a column) is still applicable and efficient.
+
+<!--Maybe also include a reference to the curse of dimensionality here --> 
 
 <img src="figures/three-tables.png" alt="three-tables notion" width="500" height="500" align="middle">  
 
-### Three-tables notion implemntation (ExpressionSet)  
+### Three-tables notion implemntation (`ExpressionSet`)  
+
 Think of your data as a cube. It has multiple surfaces each is a table of data. They share edges which could be a column or a row so each table is linked to at least one other table. This way you can use data from different tables to answer your questions.  
 
-The authors of Bioconductor put an effort in creating data structures and containers that are smart and efficient. One of these data containers is the `ExpressionSet`. It borrows the idea of three-tables to represent the data and metadata of high-throughput experiments such as microarrays. 
+The Bioconductor package offers smart and efficient data structures. One of these data containers is the `ExpressionSet`. It borrows the idea of three-tables to represent the data and metadata of high-throughput experiments such as microarrays. 
 
   -	A main table, or rather a matrix for the measurements with samples in columns and probe measurements (features) in rows. This is called the _expression matrix_ or the _assay data_  
   
@@ -85,7 +104,10 @@ The authors of Bioconductor put an effort in creating data structures and contai
   -	Additionally, it stores information about the experiment, protocol and microarrays platform in experimental data, _protocol_ data and _annotation_ spaces  
   
 Let's see how this works in an R session.  
-The DataCamp team installed Bioconductor on their platform, so you can explore it without having to worry about installation, although its really easy and will come back to it in a later occasion. In this first exercise, you will need to load an example `ExpressionSet` called `sample.ExpressionSet` from the package `Biobase` using the function `data()`. An R object is created in your session with the same name and will be accessible for you for the rest of the exercises. After loading the data set, go on and call `class()` on the object `sample.ExpressionSet`. Finally, you can use a `?` followed by the name of the object `sample.ExpressionSet` to see a description of the data set before digging deeper into it.  
+
+The DataCamp team installed Bioconductor on their platform, so you can explore it without having to worry about installation, although its really easy and will come back to it in a later occasion. 
+
+In this first exercise, you will need to load an example `ExpressionSet` called `sample.ExpressionSet` from the package `Biobase` using the function `data()`. An R object is created in your session with the same name and will be accessible for you for the rest of the exercises. After loading the data set, go on and call `class()` on the object `sample.ExpressionSet`. Finally, you can use a `?` followed by the name of the object `sample.ExpressionSet` to see a description of the data set before digging deeper into it.  
 
 ```{r ex='load_dataset', type='pre-exercise-code'}
 library(Biobase)
@@ -124,7 +146,9 @@ test_student_typed('?sample.ExpressionSet',
 success_msg('Good start. `sample.ExpressionSet` is now loaded.')
 ```
 
-After reading the help file of the data set, you probably have an idea or some expectations of what the object `sample.ExpressionSet` contains. To inspect an `Expression Set`, all you need to do is to type the object name in the R console and hit enter, it has a nice `print` method that shows general information about the set. Go on and do that, then cross reference the output with the description you saw earlier in the help file to see how different information are encoded.  
+After reading the help file of the data set, you probably have an idea or some expectations of what the object `sample.ExpressionSet` contains. 
+
+To inspect an `Expression Set`, all you need to do is to type the object name in the R console and hit enter, it has a nice `print` method that shows general information about the set. Go on and do that, then cross reference the output with the description you saw earlier in the help file to see how different information are encoded.  
 
 ```{r ex='inspect_dataset', type='pre-exercise-code'}
 library(Biobase)
@@ -149,7 +173,10 @@ success_msg('Great. Now compare the output to the help file.')
 
 Now you can tell the number samples in this data set, the number of features, the sample names, the types of phenotype data and the kind of chip (Annotation) which was used to generate this data set. 
 
-The way you can access the different tables in an `Expression Set` is to use _accessors_. These are methods to access certain information or slots in the `Expression Set`, and they work just like regular R functions by calling them on the name of the `ExpressionSet` object, like in `accessor(ExpressionSet)`. A common practice is to extract these tables in separate objects before you start exploring and analyzing your data. You will do that to have a closer look on them. 
+The way you can access the different tables in an `Expression Set` is to use _accessors_. These are methods to access certain information or slots in the `Expression Set`, and they work just like regular R functions by calling them on the name of the `ExpressionSet` object, like in `accessor(ExpressionSet)`. 
+
+A common practice is to extract these tables in separate objects before you start exploring and analyzing your data. You will do that to have a closer look on them. 
+
 Use the accessors `exprs` and `pData` to access the expression matrix and the phenotype data, and assign their output to two new objects `mat` and `pdata`, in this order. Finally, inspect the class and dimensions of each using `class` and `dim`. 
 
 ```{r ex='accessors', type='pre-exercise-code'}
@@ -201,7 +228,11 @@ test_function('dim', args = 'x', index = 2,
 success_msg('Good job.')
 ```
 
-Notice how the number of columns in `mat` equals the number of rows in `pdata`. The phenotype data are descriptions of the samples in the columns of the expression matrix. Remember there should be a shared edge between the three tables, that's it. Go on and check the names of the columns of `mat` and the row names of `pdata` and see if they are identical.  
+Note how the number of columns in `mat` equals the number of rows in `pdata`. The phenotype data are descriptions of the samples in the columns of the expression matrix. 
+
+Remember that there should be a shared edge between the three tables, that's it. 
+
+Go on and check the names of the columns of `mat` and the row names of `pdata` and see if they are identical: 
 
 ```{r ex='shared_edge', type='pre-exercise-code'}
 library(Biobase)
@@ -243,9 +274,16 @@ success_msg('Sweet. That was the shared edge.')
 ```
 
 Similarly, you can extract the metadata/annotation about the features using `fData`, however the data set doesn't contain any useful features data.  
-One nice feature about the `ExpressionSet` and many other data containers in the Bioconductor is that it is a closed-object. Remember an `ExpressionSet` encapsulates the data and the metadata from the experiment and they are connected to each other. Once you subset an `ExpressionSet`, changes are applied on its different slots. Say you only want to get the subset of data from certain samples in your experiment, you only need to subset the `ExpressionSet` once, then you get a new `ExpressionSet` with the data and the metadata for these particular samples.  
 
-The phenotype data `pdata` has three variables `sex`, `type` and `score`. You can see that by calling `names(pdata)`. Say you want the subset of data which has a `score` more than 0.50, you can first create a logical, call it `high.score`, corresponds to the samples that satisfy that condition and use it to subset `sample.ExpressionSet`, same way you subset a data.frame in R, call the new `ExpressionSet` as `sub.ExpressionSet`.  
+One nice feature about the `ExpressionSet` and many other data containers in the Bioconductor is that it is a closed-object. 
+
+Remember that an `ExpressionSet` encapsulates the data and the metadata from the experiment and they are connected to each other. Once you subset an `ExpressionSet`, changes are applied on its different slots. 
+
+Say you only want to get the subset of data from certain samples in your experiment, you only need to subset the `ExpressionSet` once, then you get a new `ExpressionSet` with the data and the metadata for these particular samples.  
+
+The phenotype data `pdata` has three variables `sex`, `type` and `score`. You can see this by calling `names(pdata)`. 
+
+Say you want the subset of data which has a `score` more than 0.50, you can first create a logical, call it `high.score`, corresponds to the samples that satisfy that condition and use it to subset `sample.ExpressionSet`, same way you subset a data.frame in R, call the new `ExpressionSet` as `sub.ExpressionSet`.  
 
 ```{r ex='subsetting', type='pre-exercise-code'}
 library(Biobase)
@@ -294,17 +332,24 @@ success_msg('Amazing. This is the default behavior of closed-objects.')
 
 Now the number of samples, which is the column number of the expression matrix and the row number of the phenotype data, is 12 instead of 24. If you try extracting the expression values and the phenotype data in the new object, there will be only data for samples with a `score` higher than 0.50. 
 
-Now, let's bring it together and construct an `ExpressionSet`. You will use the the expression matrix `mat` and the data frame `pdata` to do that but it works the same way for the data you would get from a public repository like GEO or generate in your own lab. Costructing an instance of `ExpressionSet` is as simple as the following two lines of code.  
+Now, let's bring it together and construct an `ExpressionSet`. You will use the the expression matrix `mat` and the data frame `pdata` to do that but it works the same way for the data you would get from a public repository like GEO or generate in your own lab. 
+
+Constructing an instance of `ExpressionSet` is as simple as the following two lines of code: 
 
 ```
 new.ExpressionSet <- ExpressionSet(assayData = mat)
 pData(new_ExpressionSet) <- pdata
 ```
 
-However to do that more formaly and to use the full potential of an `ExpressionSet`, there is another way but requires first to learn about a new class calle `AnnotatedDataFrame` that is typically used to store the phenotype data and the featuredata. An `AnnotatedDataFrame` contains two parts; a rgulat `data.fram` like the one you saw earlier `pdata` using the accessor `pData`, the actual data about the samples or the features. 
+However to do that more formaly and to use the full potential of an `ExpressionSet`, there is another way but requires first to learn about a new class called `AnnotatedDataFrame` that is typically used to store the phenotype data and the feature data. 
+
+An `AnnotatedDataFrame` contains two parts: a regular `data.frame` like the one you saw earlier `pdata` using the accessor `pData`, the actual data about the samples or the features. 
+
 Second part is `varMetadata`, containes a despription of each variable/column in a `data.frame` with number of rows equal number of columns in `pData`, and at least one column, named `labelDescription`.  
 
-To construct an `ExpressionSet`, first you will need to construt an `AnnotatedDataFrame` using a constructor with the same name and pass it the `pdata` and `var.metadata` as first and second arguments. Call it `phenotype.data`. Then use the constructor `ExpressionSet` with `mat` and `phenotype.data` to the apporpriate arguments. Call the new set as `new.ExpressionSet`.  
+To construct an `ExpressionSet`, first you will need to construt an `AnnotatedDataFrame` using a constructor with the same name and pass it the `pdata` and `var.metadata` as first and second arguments. Call it `phenotype.data`. 
+
+Then use the constructor `ExpressionSet` with `mat` and `phenotype.data` to the apporpriate arguments. Call the new set as `new.ExpressionSet`.  
 
 ```{r ex='construct_ExpressionSet', type='pre-exercise-code'}
 library(Biobase)
@@ -349,5 +394,7 @@ test_output_contains('new.ExpressionSet',
 success_msg('Good job.')
 ```
 
-To wrap up, you first learned about the relation between computational biology and data science, then why it is important to use a text-based environment like R to handle high-throughput data. Also, you learned about the implemntation of the three-tables notion in the Bioconductor as an `ExpressionSet`. There is a lot to learn about the `ExpressionSet` and other Bioconductor data containers. Working with biological data through Bioconductor relies heavily on smart and efficient representation of data. 
+## Conclusion
+
+To wrap up, you first learned about the relation between computational biology and data science, then why it is important to use a text-based environment like R to handle high-throughput data. Also, you learned about the implementation of the three-tables notion in the Bioconductor as an `ExpressionSet`. There is a lot to learn about the `ExpressionSet` and other Bioconductor data containers. Working with biological data through Bioconductor relies heavily on smart and efficient representation of data. 
 
