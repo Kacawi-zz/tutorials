@@ -3,8 +3,9 @@ title: "Thinking in multiple dimensions"
 author: "Mahmoud Ahmed"
 date: "2/13/2017"
 output:
+  pdf_document: default
   html_document:
-    self_contained: false
+    self_contained: no
 ---
 
 ```{r, include=FALSE}
