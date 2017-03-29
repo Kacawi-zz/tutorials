@@ -3,7 +3,6 @@ title: "Thinking in multiple dimensions"
 author: "Mahmoud Ahmed"
 date: "2/13/2017"
 output:
-  pdf_document: default
   html_document:
     self_contained: no
 ---
@@ -12,39 +11,56 @@ output:
 tutorial::go_interactive()
 ```
 
-## Data science and Biology  
+* You'll first discover how data science and life sciences can be linked, 
+* And how and why you should use R to tackle biology data. You'll see some examples of resources that you can use to get started with both. 
+* Then, you'll start by gathering some data and you'll discover what tidy data means for biology data, what the three-table notation is and how you can implement it with the `bioconductor` packages. You'll see how those packages can help you to organize your data. 
+*
 
-Chances are, you are a biologist looking for tools like R to leverage the data analysis step of your regular workflow or you have a statistical or programming background and want to apply to biology. 
+<!--- Additional ideas:
+* Discuss the difference between spreadsheets and working with R (data management problems)
+* How to install bioconductor locally (if the users want to continue without DC Light)
+* Building an expressionset from scratch (without falling back on sample data)
+* Add accessing data elements next to subsetting the data
+* You might already introduce the reader to some quick ways of visualizing the data (EDA style)
+----->
+
+## Data Science and Life Sciences  
+
+Chances are that you are a biologist looking for tools like R to leverage the data analysis step of your regular workflow or you have a statistical or programming background and want to apply to biology. 
   
 The intersection of computer programming, statistics and a particular knowledge domain is called data science. If you are like me, and your domain of application is biology, it would be called computational biology, however, it goes with many different other names. That said, as a computational biologist you are better off following the conventions and best practices of data science. However, as in all applications of data science, there are many data structures, methods and packages that were created specifically to solve problems in biology. 
 
 ## Tackling Biology with R
 
-The aim of this tutorial is to take you from the convenience of the spread sheets to the more capable (less comfortable at first though) text-based environment like R where you can manage your data, perform statistics and visualize it at publication level graphs. All in the context of biology.  
-But first things first, why would you need to do that while excel or Google sheets might just do?  
-Few reasons:    
+The aim of this tutorial is to take you from the convenience of the spreadsheets to the more capable text-based environment like R where you can manage your data, perform statistics and visualize it at publication level graphs. All in the context of biology.  
 
-  -	In R, you can handle bigger data sets efficiently. These data could be produced in your own lab or obtained from public repositories like [Gene Expression Omnibus (GEO)](https://www.ncbi.nlm.nih.gov/geo/) or [Short Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) (more on this later). In other words, you can scale up your work/research easily  
+But first things first, why would you need to do that while excel or Google sheets might just do?  
+
+Here are a few reasons:    
+
+  -	In R, you can handle bigger data sets efficiently. These data could be produced in your own lab or obtained from public repositories like [Gene Expression Omnibus (GEO)](https://www.ncbi.nlm.nih.gov/geo/) or [Short Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) (more on this later). In other words, you can scale up your work or research easily;  
   
-  -	Perform advanced statistics and use machine learning to gain deeper insights on your data  
+  -	Perform advanced statistics and use machine learning to gain deeper insights on your data;  
   
-  -	Interactively explore your data and produce basic and complex publication-level graphs  
+  -	Interactively explore your data and produce basic and complex publication-level graphs;  
   
-  -	Communicate your data, analysis and results in a reproducible way  
+  -	Communicate your data, analysis and results in a reproducible way.   
   
 For more information, read an [Introduction to R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Introduction-and-preliminaries) from the R manuals. [Introduction to R](https://www.datacamp.com/courses/introduction-to-r-edx-11) course on is one of the best places to start learning R, in case you haven't yet.  
 
-First, we will introduce you to some key concepts; these could be an experiment in the field of biology or a statistical method and there implementation R and Bioconductor. Then, we will walk you through some examples and interactive exercises. There are many resources to learn from, so we will refer to some of them.  
+First, this section will introduce you to some key concepts; these could be an experiment in the field of biology or a statistical method and there implementation R and Bioconductor. Then, you will get the opportunity to walk through some examples and interactive exercises. There are many resources to learn from, so we will refer to some of them.  
 
 So why not start by a brief introduction to Bioconductor, and a few more key ideas!  
 
   -	[Bioconductor](http://bioconductor.org) provides tools for the analysis and comprehension of high-throughput genomic data. Bioconductor uses the R statistical programming language, and is open source and open development. It has two releases each year, 1296 software packages, and an active user community.
 
-  -	[High through-put biology](https://en.wikipedia.org/wiki/High_throughput_biology) is the use of automation equipment with classical cell biology techniques to address biological questions that are otherwise unattainable using conventional methods.
+  -	High through-put biology is the use of automation equipment with classical cell biology techniques to address biological questions that are otherwise unattainable using conventional methods.
 
-  -	[Microarrays](https://en.wikipedia.org/wiki/DNA_microarray): A microarray is a multiplex lab-on-a-chip. It is a 2D array on a solid substrate (usually a glass slide or silicon thin-film cell) that assays large amounts of biological material using high-throughput screening miniaturized, multiplexed and parallel processing and detection methods.  
+  -	Microarrays: A microarray is a multiplex lab-on-a-chip. It is a 2D array on a solid substrate (usually a glass slide or silicon thin-film cell) that assays large amounts of biological material using high-throughput screening miniaturized, multiplexed and parallel processing and detection methods.  
 
-## Gathering your Data  
+## Gathering your Data
+
+The first step to getting started is of course to gather your data. This section will introduce you to how you can encode your data to a tidy format with the three-table design and explains how you can implement this for your data with the Bioconductor packages. 
 
 ### Encoding the experimental design in a tidy format  
 
@@ -90,19 +106,19 @@ Imagine you have hundreds of samples, for each you have thousands of measurement
 
 <img src="figures/three-tables.png" alt="three-tables notion" width="500" height="500" align="middle">  
 
-### Three-tables notion implemntation (`ExpressionSet`)  
+### Three-tables notion implementation (`ExpressionSet`)  
 
 Think of your data as a cube. It has multiple surfaces each is a table of data. They share edges which could be a column or a row so each table is linked to at least one other table. This way you can use data from different tables to answer your questions.  
 
 The Bioconductor package offers smart and efficient data structures. One of these data containers is the `ExpressionSet`. It borrows the idea of three-tables to represent the data and metadata of high-throughput experiments such as microarrays. 
 
-  -	A main table, or rather a matrix for the measurements with samples in columns and probe measurements (features) in rows. This is called the _expression matrix_ or the _assay data_  
+  -	A main table, or rather a matrix for the measurements with samples in columns and probe measurements (features) in rows. This is called the _expression matrix_ or the _assay data_;  <!---maybe add here that it's about microarray experiments ---->
   
-  -	Another table, or a data frame, for the metadata about the samples. This is called the _phenotype_ data    
+  -	Another table, or a data frame, for the metadata about the samples. This is called the _phenotype_ data;    
   
-  -	A third table, or a data frame as well, for the metadata (annotation) about the features. This is called the _features_ data  
+  -	A third table, or a data frame as well, for the metadata (annotation) about the features. This is called the _features_ data;  
   
-  -	Additionally, it stores information about the experiment, protocol and microarrays platform in experimental data, _protocol_ data and _annotation_ spaces  
+  -	Additionally, it stores information about the experiment, protocol and microarrays platform in experimental data, _protocol_ data and _annotation_ spaces.  
   
 Let's see how this works in an R session.  
 
@@ -176,7 +192,9 @@ Now you can tell the number samples in this data set, the number of features, th
 
 The way you can access the different tables in an `Expression Set` is to use _accessors_. These are methods to access certain information or slots in the `Expression Set`, and they work just like regular R functions by calling them on the name of the `ExpressionSet` object, like in `accessor(ExpressionSet)`. 
 
-A common practice is to extract these tables in separate objects before you start exploring and analyzing your data. You will do that to have a closer look on them. 
+## Explore Your Data
+
+A common practice is to extract the tables that you made in the previous section in separate objects before you start exploring and analyzing your data. You will do that to have a closer look on them. 
 
 Use the accessors `exprs` and `pData` to access the expression matrix and the phenotype data, and assign their output to two new objects `mat` and `pdata`, in this order. Finally, inspect the class and dimensions of each using `class` and `dim`. 
 
@@ -274,17 +292,19 @@ test_function('identical', args = c("x", "y"),
 success_msg('Sweet. That was the shared edge.')
 ```
 
-Similarly, you can extract the metadata/annotation about the features using `fData`, however the data set doesn't contain any useful features data.  
+Similarly, you can extract the metadata/annotation about the features using `fData`. However, the data set doesn't contain any useful features data.  
 
-One nice feature about the `ExpressionSet` and many other data containers in the Bioconductor is that it is a closed-object. 
+One nice feature about the `ExpressionSet` and many other data containers in the Bioconductor is that it is a closed-object. Remember that an `ExpressionSet` encapsulates the data and the metadata from the experiment and they are connected to each other. Once you subset an `ExpressionSet`, changes are applied on its different slots. 
 
-Remember that an `ExpressionSet` encapsulates the data and the metadata from the experiment and they are connected to each other. Once you subset an `ExpressionSet`, changes are applied on its different slots. 
-
-Say you only want to get the subset of data from certain samples in your experiment, you only need to subset the `ExpressionSet` once, then you get a new `ExpressionSet` with the data and the metadata for these particular samples.  
+Let's say that you only want to get the subset of data from certain samples in your experiment, you only need to subset the `ExpressionSet` once, then you get a new `ExpressionSet` with the data and the metadata for these particular samples.  
 
 The phenotype data `pdata` has three variables `sex`, `type` and `score`. You can see this by calling `names(pdata)`. 
 
-Say you want the subset of data which has a `score` more than 0.50, you can first create a logical, call it `high.score`, corresponds to the samples that satisfy that condition and use it to subset `sample.ExpressionSet`, same way you subset a data.frame in R, call the new `ExpressionSet` as `sub.ExpressionSet`.  
+If you want the subset of data which has a `score` more than 0.50, you can first create a logical and call it `high.score`. It corresponds to the samples that satisfy that condition and use it to subset `sample.ExpressionSet`. 
+
+Note that this is the same way that you use to subset a `data.frame` in R!
+
+Don't forget to rename the new ExpressionSet `sub.ExpressionSet`.  
 
 ```{r ex='subsetting', type='pre-exercise-code'}
 library(Biobase)
@@ -342,15 +362,13 @@ new.ExpressionSet <- ExpressionSet(assayData = mat)
 pData(new_ExpressionSet) <- pdata
 ```
 
-However to do that more formaly and to use the full potential of an `ExpressionSet`, there is another way but requires first to learn about a new class called `AnnotatedDataFrame` that is typically used to store the phenotype data and the feature data. 
+However, to do that more formaly and to use the full potential of an `ExpressionSet`, there is another way but requires first to learn about a new class called `AnnotatedDataFrame` that is typically used to store the phenotype data and the feature data. 
 
 An `AnnotatedDataFrame` contains two parts: a regular `data.frame` like the one you saw earlier `pdata` using the accessor `pData`, the actual data about the samples or the features. 
 
 Second part is `varMetadata`, containes a despription of each variable/column in a `data.frame` with number of rows equal number of columns in `pData`, and at least one column, named `labelDescription`.  
 
-To construct an `ExpressionSet`, first you will need to construt an `AnnotatedDataFrame` using a constructor with the same name and pass it the `pdata` and `var.metadata` as first and second arguments. Call it `phenotype.data`. 
-
-Then use the constructor `ExpressionSet` with `mat` and `phenotype.data` to the apporpriate arguments. Call the new set as `new.ExpressionSet`.  
+To construct an `ExpressionSet`, first you will need to construt an `AnnotatedDataFrame` using a constructor with the same name and pass it the `pdata` and `var.metadata` as first and second arguments. Call it `phenotype.data`. Then use the constructor `ExpressionSet` with `mat` and `phenotype.data` to the apporpriate arguments. Call the new set as `new.ExpressionSet`.  
 
 ```{r ex='construct_ExpressionSet', type='pre-exercise-code'}
 library(Biobase)
@@ -397,5 +415,6 @@ success_msg('Good job.')
 
 ## Conclusion
 
-To wrap up, you first learned about the relation between computational biology and data science, then why it is important to use a text-based environment like R to handle high-throughput data. Also, you learned about the implementation of the three-tables notion in the Bioconductor as an `ExpressionSet`. There is a lot to learn about the `ExpressionSet` and other Bioconductor data containers. Working with biological data through Bioconductor relies heavily on smart and efficient representation of data. 
+To wrap up, you first learned about the relation between computational biology and data science, then why it is important to use a text-based environment like R to handle high-throughput data. Also, you learned about the implementation of the three-tables notion in the Bioconductor as an `ExpressionSet`. 
 
+There is a lot to learn about the `ExpressionSet` and other Bioconductor data containers. Working with biological data through Bioconductor relies heavily on smart and efficient representation of data. 
